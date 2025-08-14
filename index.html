@@ -1,0 +1,1427 @@
+
+1. I'll create a responsive portfolio website for Ankit Chaurasia
+2. It should include sections: Header with name and title, About me (including education details as a BTech student at GLA University), Skills, Projects (placeholder), and Contact
+3. I'll use a modern, clean design with appropriate color scheme
+4. Will include a hero image and some visual elements to make it engaging
+5. The design should reflect a student/developer profile
+6. I'll make sure it's fully responsive using CSS Grid and Flexbox
+7. Will include interactive elements with JavaScript
+
+
+`portfolio.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankit Chaurasia | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #8338ec;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --accent-color: #ffbe0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            bottom: -10px;
+            left: 20%;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        .education {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .education h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .education-item {
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        .education-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .education-item p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Projects Section */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .project-info p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .project-links a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-card i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .contact-text h3 {
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-text p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            .header-text p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="https://placehold.co/500x500" alt="Portrait of Ankit Chaurasia, a young Indian man with a friendly smile, wearing glasses and a casual shirt" class="profile-image">
+            <div class="header-text">
+                <h1>Ankit Chaurasia</h1>
+                <p>BTech Student | Aspiring Developer</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">AC</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2>About Me</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Hello! I'm Ankit Chaurasia, a passionate and driven BTech student specializing in Computer Science. I'm currently in my 5th semester at GLA University, Mathura, where I'm developing my skills in programming, problem-solving, and software development.</p>
+                <p>I have a strong interest in web development and enjoy building projects that solve real-world problems. My academic journey has equipped me with a solid foundation in computer science fundamentals, and I'm constantly looking to expand my knowledge through personal projects and continuous learning.</p>
+                <p>When I'm not coding, you can find me exploring new technologies, participating in coding competitions, or contributing to open-source projects.</p>
+            </div>
+            <div class="education">
+                <h3>Education</h3>
+                <div class="education-item">
+                    <h4>Bachelor of Technology (BTech) in Computer Science</h4>
+                    <p>GLA University, Mathura</p>
+                    <p>2021 - Present | Currently in 5th Semester</p>
+                </div>
+                <div class="education-item">
+                    <h4>Higher Secondary Education</h4>
+                    <p>CBSE Board</p>
+                    <p>Completed in 2021</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <div class="section-title">
+            <h2>My Skills</h2>
+        </div>
+        <div class="skills-container">
+            <div class="skill-card">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5</h3>
+                <p>Semantic markup and modern HTML features</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS3</h3>
+                <p>Responsive design, Flexbox, Grid, and animations</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+                <p>DOM manipulation, ES6+ features, and basic algorithms</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-python"></i>
+                <h3>Python</h3>
+                <p>Basic programming concepts and problem-solving</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>SQL</h3>
+                <p>Database design and querying</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-git-alt"></i>
+                <h3>Git</h3>
+                <p>Version control and collaboration</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <div class="section-title">
+            <h2>My Projects</h2>
+        </div>
+        <div class="projects-container">
+            <div class="project-card">
+                <img src="https://placehold.co/600x400" alt="Screenshot of a modern e-commerce website with product listings and filters" class="project-image">
+                <div class="project-info">
+                    <h3>E-commerce Website</h3>
+                    <p>A responsive e-commerce platform built with HTML, CSS, and JavaScript featuring product listings, shopping cart functionality, and user authentication.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live Demo</a>
+                        <a href="#" target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x400" alt="Weather application interface showing current weather conditions and forecast for Mathura" class="project-image">
+                <div class="project-info">
+                    <h3>Weather App</h3>
+                    <p>A weather application that displays current weather conditions and forecasts using a weather API, built with JavaScript and responsive design principles.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live Demo</a>
+                        <a href="#" target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x400" alt="Task management application interface with a list of tasks and completion status" class="project-image">
+                <div class="project-info">
+                    <h3>Task Manager</h3>
+                    <p>A task management application that allows users to create, edit, and organize tasks with local storage for persistence.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live Demo</a>
+                        <a href="#" target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <p>ankit.chaurasia@example.com</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-text">
+                        <h3>Location</h3>
+                        <p>Mathura, Uttar Pradesh, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2023 Ankit Chaurasia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically send the form data to a server
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
+
+```
+
+🎨 **Generating images based on descriptions...**
+
+✅ **Images generated successfully! Here's your updated content:**
+
+`portfolio.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankit Chaurasia | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #8338ec;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --accent-color: #ffbe0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            bottom: -10px;
+            left: 20%;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        .education {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .education h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .education-item {
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        .education-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .education-item p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Projects Section */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .project-info p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .project-links a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-card i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .contact-text h3 {
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-text p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            .header-text p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4f45d809-c150-42ca-bd45-5de3bae6240d.png" alt="Portrait of Ankit Chaurasia, a young Indian man with a friendly smile, wearing glasses and a casual shirt" class="profile-image">
+            <div class="header-text">
+                <h1>Ankit Chaurasia</h1>
+                <p>BTech Student | Aspiring Developer</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">AC</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2>About Me</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Hello! I'm Ankit Chaurasia, a passionate and driven BTech student specializing in Computer Science. I'm currently in my 5th semester at GLA University, Mathura, where I'm developing my skills in programming, problem-solving, and software development.</p>
+                <p>I have a strong interest in web development and enjoy building projects that solve real-world problems. My academic journey has equipped me with a solid foundation in computer science fundamentals, and I'm constantly looking to expand my knowledge through personal projects and continuous learning.</p>
+                <p>When I'm not coding, you can find me exploring new technologies, participating in coding competitions, or contributing to open-source projects.</p>
+            </div>
+            <div class="education">
+                <h3>Education</h3>
+                <div class="education-item">
+                    <h4>Bachelor of Technology (BTech) in Computer Science</h4>
+                    <p>GLA University, Mathura</p>
+                    <p>2021 - Present | Currently in 5th Semester</p>
+                </div>
+                <div class="education-item">
+                    <h4>Higher Secondary Education</h4>
+                    <p>CBSE Board</p>
+                    <p>Completed in 2021</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <div class="section-title">
+            <h2>My Skills</h2>
+        </div>
+        <div class="skills-container">
+            <div class="skill-card">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5</h3>
+                <p>Semantic markup and modern HTML features</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-css3-alt"></i>
+                <h3>CSS3</h3>
+                <p>Responsive design, Flexbox, Grid, and animations</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+                <p>DOM manipulation, ES6+ features, and basic algorithms</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-python"></i>
+                <h3>Python</h3>
+                <p>Basic programming concepts and problem-solving</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>SQL</h3>
+                <p>Database design and querying</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-git-alt"></i>
+                <h3>Git</h3>
+                <p>Version control and collaboration</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <div class="section-title">
+            <h2>My Projects</h2>
+        </div>
+        <div class="projects-container">
+            <div class="project-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2832bd4b-6d02-4e67-9877-f3d09d2312c1.png" alt="Screenshot of a modern e-commerce website with product listings and filters" class="project-image">
+                <div class="project-info">
+                    <h3>E-commerce Website</h3>
+                    <p>A responsive e-commerce platform built with HTML, CSS, and JavaScript featuring product listings, shopping cart functionality, and user authentication.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live Demo</a>
+                        <a href="#" target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4a5418e8-1737-45ee-a823-f8a24710ff8b.png" alt="Weather application interface showing current weather conditions and forecast for Mathura" class="project-image">
+                <div class="project-info">
+                    <h3>Weather App</h3>
+                    <p>A weather application that displays current weather conditions and forecasts using a weather API, built with JavaScript and responsive design principles.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live Demo</a>
+                        <a href="#" target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cc3ab93e-69b5-4d0a-917d-5a8cfa22f406.png" alt="Task management application interface with a list of tasks and completion status" class="project-image">
+                <div class="project-info">
+                    <h3>Task Manager</h3>
+                    <p>A task management application that allows users to create, edit, and organize tasks with local storage for persistence.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank">Live Demo</a>
+                        <a href="#" target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <p>ankit.chaurasia@example.com</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-text">
+                        <h3>Location</h3>
+                        <p>Mathura, Uttar Pradesh, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>© 2023 Ankit Chaurasia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically send the form data to a server
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
+
+```

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+ 
+</head>
+
+<body>
+  <h1> This is my PAGE</h1>
+  <nav>
+  <a href="#home">Home</a> |
+  <a href="#about">About</a> |
+  <a href="#services">Services</a> |
+  <a href="#contact">Contact</a>
+  <h2>Registration Form</h2>
+  <form>
+    <!-- Name -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+
+    <!-- Age -->
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age"><br><br>
+
+    <!-- Gender -->
+    <label>Gender:</label>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female
+    <input type="radio" name="gender" value="Other"> Other
+    <br><br>
+
+    <!-- Country -->
+    <label for="country">Country:</label>
+    <select id="country" name="country">
+      <option value="">Select</option>
+      <option value="India">India</option>
+      <option value="USA">USA</option>
+      <option value="UK">UK</option>
+    </select><br><br>
+
+    <!-- Skills -->
+    <label>Skills:</label><br>
+    <input type="checkbox" name="skills" value="HTML"> HTML
+    <input type="checkbox" name="skills" value="CSS"> CSS
+    <input type="checkbox" name="skills" value="JavaScript"> JavaScript
+    <br><br>
+
+    <!-- Upload Resume -->
+    <label for="resume">Upload Resume:</label>
+    <input type="file" id="resume" name="resume"><br><br>
+
+    <!-- Submit -->
+    <input type="submit" value="Submit">
+  </form>
+</nav>
+
+</body>
+</html>
