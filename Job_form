@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Form</title>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Header Styles */
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .header h1 {
+      color: #2c3e50;
+      font-size: 2rem;
+    }
+    
+    /* Box Styles */
+    .box {
+      border: 2px solid orange;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+    
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    /* Button Styles */
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: orange;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .submit-btn:hover {
+      background-color: darkorange;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Job Application Form</h1>
+    </header>
+    
+    <!-- Personal Information Box -->
+    <div class="box">
+      <h2>Personal Information</h2>
+      <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" name="first-name" required>
+      </div>
+      <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" name="last-name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+    </div>
+    
+    <!-- Job Details Box -->
+    <div class="box">
+      <h2>Job Details</h2>
+      <div class="form-group">
+        <label for="position">Position Applied For</label>
+        <input type="text" id="position" name="position" required>
+      </div>
+      <div class="form-group">
+        <label for="experience">Years of Experience</label>
+        <input type="number" id="experience" name="experience" required>
+      </div>
+      <div class="form-group">
+        <label for="cover-letter">Cover Letter</label>
+        <input type="text" id="cover-letter" name="cover-letter" required>
+      </div>
+    </div>
+    
+    <!-- Availability Box -->
+    <div class="box">
+      <h2>Availability</h2>
+      <div class="form-group">
+        <label for="start-date">Available Start Date</label>
+        <input type="date" id="start-date" name="start-date" required>
+      </div>
+      <div class="form-group">
+        <label>Willing to Relocate?</label>
+        <input type="radio" id="relocate-yes" name="relocate" value="Yes" required>
+        <label for="relocate-yes">Yes</label>
+        <input type="radio" id="relocate-no" name="relocate" value="No" required>
+        <label for="relocate-no">No</label>
+      </div>
+    </div>
+    
+    <!-- Submit Button -->
+    <button type="submit" class="submit-btn">Submit Application</button>
+  </div>
+</body>
+</html>
